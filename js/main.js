@@ -1,5 +1,4 @@
 /* 
-
 new Swiper('.swiper-container', {
 	loop: true,
 	navigation: {
@@ -23,7 +22,6 @@ menuButton.addEventListener('click', function () {
 	menuButton.classList.toggle('menu-button-active');
 	menu.classList.toggle('header-active');
 }) 
-
 */
 
 const getElement = (tagName, classNames, attributes) => {
@@ -187,6 +185,18 @@ const movieConstructor = (selector, options) => {
 
 	document.title = options.title;
 
+	if (options.favicon) {
+		const index = options.favicon.lastIndexOf('.');
+		const type = options.favicon.substring(index + 1);
+
+		const favicon = getElement('link', null, {
+			rel: 'icon',
+			href: options.favicon,
+			type: 'image/' + (type === 'svg' ? 'svg-xml' : type),
+		});
+		document.head.append(favicon);
+	}
+
 	if (options.header) {
 		app.append(createHeader(options));
 	}
@@ -199,6 +209,7 @@ const movieConstructor = (selector, options) => {
 movieConstructor('.app', {
 	title: 'WITCHER',
 	background: 'witcher/background.jpg',
+	favicon: 'witcher/logo.png',
 	header: {
 		logo: 'witcher/logo.png',
 		social: [{
