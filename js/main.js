@@ -1,29 +1,3 @@
-/* 
-new Swiper('.swiper-container', {
-	loop: true,
-	navigation: {
-		nextEl: '.arrow',
-	},
-	breakpoints: {
-		320: {
-			slidesPerView: 1,
-			spaceBetween: 20
-		},
-		541: {
-			slidesPerView: 2,
-			spaceBetween: 40
-		}
-	}
-});
-
-const menuButton = document.querySelector('.menu-button');
-const menu = document.querySelector('.header');
-menuButton.addEventListener('click', function () {
-	menuButton.classList.toggle('menu-button-active');
-	menu.classList.toggle('header-active');
-}) 
-*/
-
 const getElement = (tagName, classNames, attributes) => {
 	const element = document.createElement(tagName);
 
@@ -65,8 +39,14 @@ const createHeader = ({title, header: {logo, menu, social}}) => {
 			return menuItem;
 		})
 		menuList.append(...menuItems);
-
 		wrapper.append(menuList);
+
+		const menuBtn = getElement('button', ['menu-button']);
+		menuBtn.addEventListener('click', () => {
+			menuBtn.classList.toggle('menu-button-active');
+			wrapper.classList.toggle('header-active');
+		});
+		container.append(menuBtn);
 	}
 
 	if (social) {
@@ -85,15 +65,6 @@ const createHeader = ({title, header: {logo, menu, social}}) => {
 		wrapper.append(socialWrapper);
 	}
 
-	if (menu) {
-		const menuBtn = getElement('button', ['menu-button']);
-		menuBtn.addEventListener('click', () => {
-			menuBtn.classList.toggle('menu-button-active');
-			wrapper.classList.toggle('header-active');
-		});
-		container.append(menuBtn);
-	}
-
 	header.append(container);
 	container.append(wrapper);
 
@@ -101,7 +72,7 @@ const createHeader = ({title, header: {logo, menu, social}}) => {
 }
 
 const createMain = ({ title,
-	main: { genre, rating, description, trailer } }) => {
+	main: { genre, rating, description, trailer, slider } }) => {
 
 	const main = getElement('main');
 
@@ -181,6 +152,66 @@ const createMain = ({ title,
 		youtubeImageLink.append(iconPlay);
 		wrapper.append(youtubeImageLink);
 	}
+
+	if (slider) {
+		const sliderBlock = getElement('div', ['series']);
+		const swiperBlock = getElement('div', ['swiper-container']);
+		const swiperWrapper = getElement('div', ['swiper-wrapper']);
+		const arrow = getElement('button', ['arrow']);
+
+		const slides = slider.map((item) => {
+
+			const swiperSlide = getElement('div', ['swiper-slide']);
+			const card = getElement('figure', ['card']);
+			const cardImage = getElement('img', ['card-img'], {
+				src: item.img,
+				alt: ((item.title || '') + ' ' + (item.subtitle || '')).trim(),
+			})
+
+			card.append(cardImage);
+
+			if (item.title || item.subtitle) {
+				const cardDescription = getElement('figcaption', ['card-description']);
+				cardDescription.innerHTML = `
+					${item.subtitle ? `<p class="card-title">${item.subtitle}</p>` : ''}
+					${item.title ? `<p class="card-subtitle">${item.title}</p>` : ''}
+				`;
+
+				card.append(cardDescription);
+			};
+			swiperSlide.append(card);
+			return swiperSlide;
+		});
+		swiperWrapper.append(...slides);
+		swiperBlock.append(swiperWrapper);
+		sliderBlock.append(swiperBlock, arrow);
+
+		container.append(sliderBlock);
+
+		new Swiper(swiperBlock, {
+			loop: true,
+			navigation: {
+				nextEl: arrow,
+			},
+			breakpoints: {
+				320: {
+					slidesPerView: 1,
+					spaceBetween: 20
+				},
+				541: {
+					slidesPerView: 2,
+					spaceBetween: 40
+				}
+			}
+		});
+
+		const menuButton = document.querySelector('.menu-button');
+		const menu = document.querySelector('.header');
+		menuButton.addEventListener('click', function () {
+			menuButton.classList.toggle('menu-button-active');
+			menu.classList.toggle('header-active');
+		}) 
+	}
 	
 	return main;
 }
@@ -254,5 +285,27 @@ movieConstructor('.app', {
 		rating: '8',
 		description: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей верной лошади по кличке Плотва путешествует по Континенту. За тугой мешочек чеканных монет этот мужчина избавит вас от всякой настырной нечисти — хоть от чудищ болотных, оборотней и даже заколдованных принцесс.',
 		trailer: 'https://www.youtube.com/watch?v=P0oJqfLzZzQ',
+		slider: [
+			{
+				img: 'witcher/series/series-1.jpg',
+				title: 'Начало конца',
+				subtitle: 'Серия №1',
+			},
+			{
+				img: 'witcher/series/series-2.jpg',
+				title: 'Четыре марки',
+				subtitle: 'Серия №2',
+			},
+			{
+				img: 'witcher/series/series-3.jpg',
+				title: 'Предательская луна',
+				subtitle: 'Серия №3',
+			},
+			{
+				img: 'witcher/series/series-4.jpg',
+				title: 'Банкеты, ублюдки и похороны',
+				subtitle: 'Серия №4',
+			},
+		]
 	}
 });
