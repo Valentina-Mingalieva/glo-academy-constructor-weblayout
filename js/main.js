@@ -216,19 +216,53 @@ const createMain = ({ title,
 	return main;
 }
 
+const createFooter = ({ footer: { year, name, footerMenu }}) => {
+	const footer = getElement('div', ['footer']);
+	const footerContainer = getElement('div', ['container']);
+	const footerContent = getElement('div', ['footer-content']);
+
+	const footerLeft = getElement('div', ['left']);
+	const footerText = getElement('span', ['copyright'], {
+		textContent: `© ${year} ${name}. All right reserved.`
+	});
+	footerLeft.append(footerText);
+
+	const footerRight = getElement('div', ['right']);
+	/* const footerNav = getElement('nav', ['footer-menu']);
+	const footerLinks = footerNav.map(item => {
+		const footerLink = getElement('a', ['footer-link'], {
+			href: item.link,
+			textContent: item.title,
+		});
+
+		return footerLink;
+	})
+	footerNav.append(...footerLinks);
+	footerRight.append(footerNav); */
+
+	footerContent.append(footerLeft, footerRight);
+	footerContainer.append(footerContent);
+	footer.append(footerContainer);
+
+	console.log(footer);
+	return footer;
+}
+		
 const movieConstructor = (selector, options) => {
 	const app = document.querySelector(selector);
 	app.classList.add('body-app');
 
-	app.style.backgroundImage = options.background ?
-		`url('${options.background}')` : '';
-
-	document.title = options.title;
+	app.style.color = options.fontColor || '';
+	app.style.backgroundColor = options.backgroundColor || '';
+	
+	if (options.subColor) {
+		document.documentElement.style.setProperty('--sub-color', options.subColor);
+	}
 
 	if (options.favicon) {
 		const index = options.favicon.lastIndexOf('.');
 		const type = options.favicon.substring(index + 1);
-
+		
 		const favicon = getElement('link', null, {
 			rel: 'icon',
 			href: options.favicon,
@@ -236,13 +270,22 @@ const movieConstructor = (selector, options) => {
 		});
 		document.head.append(favicon);
 	}
+	
+	app.style.backgroundImage = options.background ?
+		`url('${options.background}')` : '';
+
+	document.title = options.title;
 
 	if (options.header) {
 		app.append(createHeader(options));
 	}
-
+	
 	if (options.main) {
 		app.append(createMain(options));
+	}
+
+	if (options.footer) {
+		app.append(createFooter(options));
 	}
 }
 
@@ -250,21 +293,11 @@ movieConstructor('.app', {
 	title: 'WITCHER',
 	background: 'witcher/background.jpg',
 	favicon: 'witcher/logo.png',
+	fontColor: '#ffffff',
+	backgroundColor: '#141218',
+	subColor: '#9D2929',
 	header: {
 		logo: 'witcher/logo.png',
-		social: [{
-			title: 'Twitter',
-			link: 'http://twitter.com', 
-			image: 'witcher/social/twitter.svg',
-		}, {
-			title: 'Instagram',
-			link: 'http://instagram.com', 
-			image: 'witcher/social/instagram.svg',
-		}, {
-			title: 'Facebook',
-			link: 'http://facebook.com', 
-			image: 'witcher/social/facebook.svg',
-			}],
 		menu: [
 			{
 				title: 'Описание',
@@ -278,7 +311,21 @@ movieConstructor('.app', {
 				title: 'Отзывы',
 				link: '#',
 			},
-		]
+		],
+		social: [{
+				title: 'Twitter',
+				link: 'http://twitter.com', 
+				image: 'witcher/social/twitter.svg',
+			}, {
+				title: 'Instagram',
+				link: 'http://instagram.com', 
+				image: 'witcher/social/instagram.svg',
+			}, {
+				title: 'Facebook',
+				link: 'http://facebook.com', 
+				image: 'witcher/social/facebook.svg',
+			}
+		],
 	},
 	main: {
 		genre: '2019, fantasy',
@@ -305,6 +352,24 @@ movieConstructor('.app', {
 				img: 'witcher/series/series-4.jpg',
 				title: 'Банкеты, ублюдки и похороны',
 				subtitle: 'Серия №4',
+			},
+		]
+	},
+	footer: {
+		year: '2020',
+		name: 'The Witcher',
+		footerMenu: [
+			{
+				title: 'Privacy Policy',
+				link: '#',
+			},
+			{
+				title: 'Terms of Service',
+				link: '#',
+			},
+			{
+				title: 'Legal',
+				link: '#',
 			},
 		]
 	}
