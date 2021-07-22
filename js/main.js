@@ -40,23 +40,23 @@ const getElement = (tagName, classNames, attributes) => {
 	return element;
 }
 
-const createHeader = (param) => {
+const createHeader = ({title, header: {logo, menu, social}}) => {
 	const header = getElement('header');
 	const container = getElement('div', ['container']);
 	const wrapper = getElement('div', ['header']);
 	
 
-	if (param.header.logo) {
-		const logo = getElement('img', ['logo'], {
-			src: param.header.logo,
-			alt: 'Logo' + param.title,
+	if (logo) {
+		const logoElem = getElement('img', ['logo'], {
+			src: logo,
+			alt: 'Logo' + title,
 		});
-		wrapper.append(logo);
+		wrapper.append(logoElem);
 	}
 	
-	if (param.header.menu) {
+	if (menu) {
 		const menuList = getElement('nav', ['menu-list']);
-		const menuItems = param.header.menu.map(item => {
+		const menuItems = menu.map(item => {
 			const menuItem = getElement('a', ['menu-link'], {
 				href: item.link,
 				textContent: item.title,
@@ -69,9 +69,9 @@ const createHeader = (param) => {
 		wrapper.append(menuList);
 	}
 
-	if (param.header.social) {
+	if (social) {
 		const socialWrapper = getElement('div', ['social']);
-		const allSocial = param.header.social.map(item => {
+		const allSocial = social.map(item => {
 			const socialLink = getElement('a', ['social-link']);
 			socialLink.append(getElement('img', [], {
 				src: item.image,
@@ -83,6 +83,15 @@ const createHeader = (param) => {
 		})
 		socialWrapper.append(...allSocial);
 		wrapper.append(socialWrapper);
+	}
+
+	if (menu) {
+		const menuBtn = getElement('button', ['menu-button']);
+		menuBtn.addEventListener('click', () => {
+			menuBtn.classList.toggle('menu-button-active');
+			wrapper.classList.toggle('header-active');
+		});
+		container.append(menuBtn);
 	}
 
 	header.append(container);
