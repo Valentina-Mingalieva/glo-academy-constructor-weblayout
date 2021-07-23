@@ -228,8 +228,8 @@ const createFooter = ({ footer: { year, name, footerMenu }}) => {
 	footerLeft.append(footerText);
 
 	const footerRight = getElement('div', ['right']);
-	/* const footerNav = getElement('nav', ['footer-menu']);
-	const footerLinks = footerNav.map(item => {
+	const footerNav = getElement('nav', ['footer-menu']);
+	const footerLinks = footerMenu.map(item => {
 		const footerLink = getElement('a', ['footer-link'], {
 			href: item.link,
 			textContent: item.title,
@@ -238,7 +238,7 @@ const createFooter = ({ footer: { year, name, footerMenu }}) => {
 		return footerLink;
 	})
 	footerNav.append(...footerLinks);
-	footerRight.append(footerNav); */
+	footerRight.append(footerNav);
 
 	footerContent.append(footerLeft, footerRight);
 	footerContainer.append(footerContent);
@@ -290,14 +290,14 @@ const movieConstructor = (selector, options) => {
 }
 
 movieConstructor('.app', {
-	title: 'WITCHER',
-	background: 'witcher/background.jpg',
-	favicon: 'witcher/logo.png',
+	title: 'LOKI',
+	background: 'loki/background.jpg',
+	favicon: 'loki/favicon.png',
 	fontColor: '#ffffff',
-	backgroundColor: '#141218',
-	subColor: '#9D2929',
+	backgroundColor: '#000000',
+	subColor: '#014206',
 	header: {
-		logo: 'witcher/logo.png',
+		logo: 'loki/logo.png',
 		menu: [
 			{
 				title: 'Описание',
@@ -315,49 +315,59 @@ movieConstructor('.app', {
 		social: [{
 				title: 'Twitter',
 				link: 'http://twitter.com', 
-				image: 'witcher/social/twitter.svg',
+				image: 'loki/social/twitter.svg',
 			}, {
 				title: 'Instagram',
 				link: 'http://instagram.com', 
-				image: 'witcher/social/instagram.svg',
+				image: 'loki/social/instagram.svg',
 			}, {
 				title: 'Facebook',
 				link: 'http://facebook.com', 
-				image: 'witcher/social/facebook.svg',
+				image: 'loki/social/facebook.svg',
 			}
 		],
 	},
 	main: {
-		genre: '2019, fantasy',
-		rating: '8',
-		description: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей верной лошади по кличке Плотва путешествует по Континенту. За тугой мешочек чеканных монет этот мужчина избавит вас от всякой настырной нечисти — хоть от чудищ болотных, оборотней и даже заколдованных принцесс.',
-		trailer: 'https://www.youtube.com/watch?v=P0oJqfLzZzQ',
-		slider: [
+        genre: '2021, фантастика, фэнтези, боевик, приключения',
+        rating: '8',
+        description: 'Локи попадает в таинственную организацию «Управление временными изменениями» после того, как он украл Тессеракт, и путешествует во времени, меняя историю.',
+        trailer: 'https://youtu.be/YrjHcYqe31g',
+        slider: [
 			{
-				img: 'witcher/series/series-1.jpg',
-				title: 'Начало конца',
+				img: 'loki/series/series-1.jpg',
+				title: 'Славная миссия',
 				subtitle: 'Серия №1',
-			},
+			}, 
 			{
-				img: 'witcher/series/series-2.jpg',
-				title: 'Четыре марки',
+				img: 'loki/series/series-2.jpg',
+				title: 'Вариант',
 				subtitle: 'Серия №2',
-			},
+			}, 
 			{
-				img: 'witcher/series/series-3.jpg',
-				title: 'Предательская луна',
+				img: 'loki/series/series-3.jpg',
+				title: 'Ламентис',
 				subtitle: 'Серия №3',
-			},
+			}, 
 			{
-				img: 'witcher/series/series-4.jpg',
-				title: 'Банкеты, ублюдки и похороны',
+				img: 'loki/series/series-4.jpg',
+				title: 'Смежное событие',
 				subtitle: 'Серия №4',
 			},
-		]
-	},
+			{
+				img: 'loki/series/series-5.jpg',
+				title: 'Путешествие в неизвестность',
+				subtitle: 'Серия №5',
+			},
+			{
+				img: 'loki/series/series-6.jpg',
+				title: 'На все времена. Всегда',
+				subtitle: 'Серия №6',
+			}
+        ]
+    },
 	footer: {
-		year: '2020',
-		name: 'The Witcher',
+		year: '2021',
+		name: 'LOKI',
 		footerMenu: [
 			{
 				title: 'Privacy Policy',

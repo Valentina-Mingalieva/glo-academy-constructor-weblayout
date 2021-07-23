@@ -1,0 +1,85 @@
+movieConstructor('.app', {
+	title: 'WITCHER',
+	background: 'witcher/background.jpg',
+	favicon: 'witcher/logo.png',
+	fontColor: '#ffffff',
+	backgroundColor: '#141218',
+	subColor: '#9D2929',
+	header: {
+		logo: 'witcher/logo.png',
+		menu: [
+			{
+				title: 'Описание',
+				link: '#',
+			},
+			{
+				title: 'Трейлер',
+				link: '#',
+			},
+			{
+				title: 'Отзывы',
+				link: '#',
+			},
+		],
+		social: [{
+				title: 'Twitter',
+				link: 'http://twitter.com', 
+				image: 'witcher/social/twitter.svg',
+			}, {
+				title: 'Instagram',
+				link: 'http://instagram.com', 
+				image: 'witcher/social/instagram.svg',
+			}, {
+				title: 'Facebook',
+				link: 'http://facebook.com', 
+				image: 'witcher/social/facebook.svg',
+			}
+		],
+	},
+	main: {
+		genre: '2019, fantasy',
+		rating: '8',
+		description: 'Ведьмак Геральт, мутант и убийца чудовищ, на своей верной лошади по кличке Плотва путешествует по Континенту. За тугой мешочек чеканных монет этот мужчина избавит вас от всякой настырной нечисти — хоть от чудищ болотных, оборотней и даже заколдованных принцесс.',
+		trailer: 'https://www.youtube.com/watch?v=P0oJqfLzZzQ',
+		slider: [
+			{
+				img: 'witcher/series/series-1.jpg',
+				title: 'Начало конца',
+				subtitle: 'Серия №1',
+			},
+			{
+				img: 'witcher/series/series-2.jpg',
+				title: 'Четыре марки',
+				subtitle: 'Серия №2',
+			},
+			{
+				img: 'witcher/series/series-3.jpg',
+				title: 'Предательская луна',
+				subtitle: 'Серия №3',
+			},
+			{
+				img: 'witcher/series/series-4.jpg',
+				title: 'Банкеты, ублюдки и похороны',
+				subtitle: 'Серия №4',
+			},
+		]
+	},
+	footer: {
+		year: '2020',
+		name: 'The Witcher',
+		footerMenu: [
+			{
+				title: 'Privacy Policy',
+				link: '#',
+			},
+			{
+				title: 'Terms of Service',
+				link: '#',
+			},
+			{
+				title: 'Legal',
+				link: '#',
+			},
+		]
+	}
+});
